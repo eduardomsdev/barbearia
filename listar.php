@@ -1,119 +1,92 @@
 <?php
+// Conexão
 include "conexao.php";
 
-// EXCLUIR
-if(isset($_GET["excluir"])){
-    echo "<script>
-        if(confirm('Realmente deseja excluir?')){
-            window.location = 'listar.php?confirmar=".$_GET["excluir"]."';
-        }
-    </script>";
-}
-
-if(isset($_GET["confirmar"])){
-    $id = $_GET["confirmar"];
+// Excluir registro
+if (isset($_GET["excluir"])) {
+    $id = intval($_GET["excluir"]);
     $conexao->query("DELETE FROM agendamentos WHERE id = $id");
+    header("Location: listar.php");
+    exit;
 }
 
-/* ============================
-   BUSCAR LISTAS POR BARBEIRO
-   ============================ */
-
-$junior = $conexao->query("SELECT * FROM agendamentos WHERE barbeiro = 'Junior Barbeiro'");
-$cesar  = $conexao->query("SELECT * FROM agendamentos WHERE barbeiro = 'Cesar Barbeiro'");
-$roberto = $conexao->query("SELECT * FROM agendamentos WHERE barbeiro = 'Roberto Barbeiro'");
+// Selecionar todos agendamentos
+$sql = "SELECT * FROM agendamentos ORDER BY data ASC, hora ASC";
+$result = $conexao->query($sql);
 ?>
 
-<h1>Listagem de Agendamentos</h1>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Listagem de Agendamentos</title>
+    <link rel="stylesheet" href="listar.css">
+</head>
+<body>
 
-<style>
-table{
-    border-collapse: collapse;
-    width: 90%;
-    margin-bottom: 40px;
-}
-th, td{
-    border: 1px solid black;
-    padding: 8px;
-}
-h2{
-    margin-top: 40px;
-}
-</style>
+<div class="tabela-container">
 
-<!-- JUNIOR -->
-<h2>Lista de agendamento do Junior</h2>
+    <h1>Listagem de Agendamentos</h1>
 
-<?php if($junior->num_rows > 0): ?>
-<table>
-<tr>
-<th>ID</th><th>Nome</th><th>Email</th><th>Data</th><th>Hora</th><th>Serviço</th><th>Obs</th><th>Ação</th>
-</tr>
-<?php while($row = $junior->fetch_assoc()): ?>
-<tr>
-<td><?= $row["id"] ?></td>
-<td><?= $row["nome"] ?></td>
-<td><?= $row["gmail"] ?></td>
-<td><?= $row["data"] ?></td>
-<td><?= $row["hora"] ?></td>
-<td><?= $row["servico"] ?></td>
-<td><?= $row["observacao"] ?></td>
-<td><a href="listar.php?excluir=<?= $row['id'] ?>">Excluir</a></td>
-</tr>
-<?php endwhile; ?>
-</table>
-<?php else: ?>
-<p>Nenhum agendamento encontrado.</p>
-<?php endif; ?>
+    <?php if ($result->num_rows > 0): ?>
 
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Barbeiro</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Data</th>
+                <th>Hora</th>
+                <th>Serviço</th>
+                <th>Observação</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
 
-<!-- CESAR -->
-<h2>Lista de agendamento do Cesar</h2>
+        <tbody>
+            <?php while($row = $result->fetch_assoc()): ?>
+            <tr>
+                <td data-label="ID"><?= $row["id"] ?></td>
 
-<?php if($cesar->num_rows > 0): ?>
-<table>
-<tr>
-<th>ID</th><th>Nome</th><th>Email</th><th>Data</th><th>Hora</th><th>Serviço</th><th>Obs</th><th>Ação</th>
-</tr>
-<?php while($row = $cesar->fetch_assoc()): ?>
-<tr>
-<td><?= $row["id"] ?></td>
-<td><?= $row["nome"] ?></td>
-<td><?= $row["gmail"] ?></td>
-<td><?= $row["data"] ?></td>
-<td><?= $row["hora"] ?></td>
-<td><?= $row["servico"] ?></td>
-<td><?= $row["observacao"] ?></td>
-<td><a href="listar.php?excluir=<?= $row['id'] ?>">Excluir</a></td>
-</tr>
-<?php endwhile; ?>
-</table>
-<?php else: ?>
-<p>Nenhum agendamento encontrado.</p>
-<?php endif; ?>
+                <td data-label="Barbeiro">
+                    <?= $row["barbeiro"] ?>
+                </td>
 
+                <td data-label="Nome"><?= $row["nome"] ?></td>
 
-<!-- ROBERTO -->
-<h2>Lista de agendamento do Roberto</h2>
+                <td data-label="Email"><?= $row["gmail"] ?></td>
 
-<?php if($roberto->num_rows > 0): ?>
-<table>
-<tr>
-<th>ID</th><th>Nome</th><th>Email</th><th>Data</th><th>Hora</th><th>Serviço</th><th>Obs</th><th>Ação</th>
-</tr>
-<?php while($row = $roberto->fetch_assoc()): ?>
-<tr>
-<td><?= $row["id"] ?></td>
-<td><?= $row["nome"] ?></td>
-<td><?= $row["gmail"] ?></td>
-<td><?= $row["data"] ?></td>
-<td><?= $row["hora"] ?></td>
-<td><?= $row["servico"] ?></td>
-<td><?= $row["observacao"] ?></td>
-<td><a href="listar.php?excluir=<?= $row['id'] ?>">Excluir</a></td>
-</tr>
-<?php endwhile; ?>
-</table>
-<?php else: ?>
-<p>Nenhum agendamento encontrado.</p>
-<?php endif; ?>
+                <td data-label="Data">
+                    <?= date("d/m/Y", strtotime($row["data"])) ?>
+                </td>
+
+                <td data-label="Hora"><?= $row["hora"] ?></td>
+
+                <td data-label="Serviço"><?= $row["servico"] ?></td>
+
+                <td data-label="Observação"><?= $row["observacao"] ?></td>
+
+                <td data-label="Ação">
+                    <a class="btn-excluir" 
+                       href="listar.php?excluir=<?= $row['id'] ?>"
+                       onclick="return confirm('Realmente deseja excluir?');">
+                       Excluir
+                    </a>
+                </td>
+            </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
+
+    <?php else: ?>
+        <p style="text-align:center; font-size:18px; color:black;">
+            Nenhum agendamento encontrado.
+        </p>
+    <?php endif; ?>
+
+</div>
+
+</body>
+</html>

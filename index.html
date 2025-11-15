@@ -3,120 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barbearia Git</title>
+    <title>barbearia</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header> 
+        <h1>Barbearia Git</h1>
+    </header>
 
-<header> 
-    <h1>Barbearia Git</h1>
-    <a href="listar.php" class="listar-btn">Listar Agendamentos</a>
-</header>
+    <div class="container">
+        <h2>Bem-vindo à Barbearia Git!</h2>
+        <p>Aqui você encontra os melhores serviços de barbearia da cidade.</p>
+    </div class="container">
 
-<div class="container">
-    <h2>Bem-vindo à Barbearia Git!</h2>
-    <p>Aqui você encontra os melhores serviços de barbearia da cidade.</p>
-</div>
+    <h2>conheca nossos melhores barbeiros</h2>
+     <section class="Barbeiros">
 
-<h2>Conheça nossos melhores barbeiros</h2>
+    <div class="card" data-nome="Junior" data-preco="50.00">
+      <img src="imagem/junior_1.webp" alt="Junior">
+        <h3>Junior</h3>
 
-<section class="Barbeiros">
-
-    <!-- JUNIOR -->
-    <div class="banner">
-        <div class="info">
-            <h2>Junior</h2>
-            <p>Experimente o serviço do nosso profissional júnior — excelência não precisa custar caro.</p>
-            <button class="btn-agendar"
-                onclick="abrirDetalhes(
-                    'Junior Barbeiro',
-                    'Experimente o serviço do nosso profissional júnior — excelência não precisa custar caro.',
-                    'imagem/junior_1.webp'
-                )">Agendar Serviços</button>
-        </div>
-        <img src="imagem/junior_1.webp">
+        <a class="btn-carrinho"
+           onclick="abrirDetalhes(
+               'Junior Barbeiro',
+               'Experimente o serviço do nosso profissional júnior — excelência não precisa custar caro.',
+               ['imagem/fundo-junior.webp']
+           )">
+           Agendar Serviços
+        </a>
     </div>
 
-    <!-- CESAR -->
-    <div class="banner">
-        <div class="info">
-            <h2>Cesar</h2>
-            <p>Atenda-se com nosso profissional Cesar: dedicado, talentoso e pronto para te surpreender.</p>
-            <button class="btn-agendar"
-                onclick="abrirDetalhes(
-                    'Cesar Barbeiro',
-                    'Atenda-se com nosso profissional Cesar: dedicado, talentoso e pronto para te surpreender.',
-                    'imagem/cesar.jpg'
-                )">Agendar Serviços</button>
-        </div>
-        <img src="imagem/cesar.jpg">
+
+    <div class="card" data-nome="Cesar" data-preco="60.00">
+      <img src="imagem/cesar.jpg" alt="Cesar">
+        <h3>Cesar</h3>
+
+        <a class="btn-carrinho"
+           onclick="abrirDetalhes(
+               'Cesar Barbeiro',
+               'Atenda-se com nosso profissional Cesar: dedicado, talentoso e pronto para te surpreender.',
+               ['imagem/fundo-cesar.webp']
+           )">
+           Agendar Serviços
+        </a>
     </div>
 
-    <!-- ROBERTO -->
-    <div class="banner">
-        <div class="info">
-            <h2>Roberto</h2>
-            <p>Garanta seu horário com nosso profissional Roberto — qualidade, cuidado e preço justo.</p>
-            <button class="btn-agendar"
-                onclick="abrirDetalhes(
-                    'Roberto Barbeiro',
-                    'Garanta seu horário com nosso profissional Roberto — qualidade, cuidado e preço justo.',
-                    'imagem/Roberto_1.webp'
-                )">Agendar Serviços</button>
-        </div>
-        <img src="imagem/Roberto_1.webp">
+
+    <div class="card" data-nome="Roberto" data-preco="70.00">
+      <img src="imagem/Roberto_1.webp" alt="Roberto">
+        <h3>Roberto</h3>
+        <a class="btn-carrinho"
+           onclick="abrirDetalhes(
+               'Roberto Barbeiro',
+               'Garanta seu horário com nosso profissional Roberto — qualidade, cuidado e preço justo.',
+               ['imagem/fundo roberto.webp']
+           )">
+           Agendar Serviços
+        </a>
     </div>
 
 </section>
+</section>
 
-<!-- MODAL -->
 <div id="modal" class="modal">
-    <div class="modal-content">
-
-        <div class="detalhes-barbeiro">
-            <h2 id="detalhesNome"></h2>
-            <p id="detalhesDescricao"></p>
-            <img id="detalhesImagem" src="">
-        </div>
-
-        <form class="form-agendar" method="POST" action="cadastrar.php" onsubmit="return validarFormulario()">
-            <input type="hidden" name="barbeiro" id="barbeiro">
-
-            <label>Nome:</label>
-            <input type="text" name="nome" id="nome">
-
-            <label>Email:</label>
-            <input type="email" name="gmail" id="gmail">
-
-            <label>Data:</label>
-            <input type="date" name="data" id="data">
-
-            <label>Horário:</label>
-            <select name="hora" id="hora"></select>
-
-            <label>Serviço:</label>
-            <select name="servico" id="servico">
-             <option value="">Escolha...</option>
-             <option value="Degradê">Degradê</option>
-             <option value="Cabelo e Barba">Cabelo e Barba</option>
-            <option value="Degradê Navalhado">Degradê Navalhado</option>
-             <option value="Social">Social</option>
-             <option value="Sobrancelha">Sobrancelha</option>
-</select>
-
-            </select>
-
-            <label>Observação:</label>
-            <textarea name="obs" id="obs"></textarea>
-
-            <button type="submit">Finalizar</button>
-        </form>
-
-
+  <div class="modal-content">
+    
+    <div class="detalhes-barbeiro">
+        <h2 id="detalhesNome"></h2>
+        <p id="detalhesDescricao"></p>
+        <img id="detalhesImagem" src="" alt="">
     </div>
+
+    <div class="form-agendar">
+        <h3>Agendar com este barbeiro</h3>
+
+        <label>Nome:</label>
+        <input type="text" id="nome">
+
+        <label>Email:</label>
+        <input type="email" id="gmail">
+
+        <label>Data:</label>
+        <input type="date" id="data">
+
+        <label>Horário:</label>
+        <select id="hora"></select>
+
+        <label>Serviço:</label>
+        <select id="servico">
+            <option value="">Escolha...</option>
+            <option value="20">Degradê - R$20</option>
+            <option value="30">Cabelo e Barba - R$30</option>
+            <option value="30">Degradê Navalhado - R$30</option>
+            <option value="15">Social - R$15</option>
+            <option value="5">Sobrancelha - R$5</option>
+        </select>
+
+        <label>Observação:</label>
+        <textarea id="obs"></textarea>
+
+        <button onclick="finalizarAgendamento()">Finalizar</button>
+    </div>
+
+  </div>
 </div>
 
+<footer>
+    <p>&copy; 2024 Barbearia Git. Todos os direitos reservados.</p> 
+    bairro joquei clube, rua 10, n 45
+</footer>
 <script src="script.js"></script>
-
 </body>
 </html>
+
