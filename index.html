@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbearia Git</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header> 
+    <h1>Barbearia Git</h1>
+    <a href="listar.php" class="listar-btn">Listar Agendamentos</a>
+</header>
+
+<div class="container">
+    <h2>Bem-vindo à Barbearia Git!</h2>
+    <p>Aqui você encontra os melhores serviços de barbearia da cidade.</p>
+</div>
+
+<h2>Conheça nossos melhores barbeiros</h2>
+
+<section class="Barbeiros">
+
+    <!-- JUNIOR -->
+    <div class="banner">
+        <div class="info">
+            <h2>Junior</h2>
+            <p>Experimente o serviço do nosso profissional júnior — excelência não precisa custar caro.</p>
+            <button class="btn-agendar"
+                onclick="abrirDetalhes(
+                    'Junior Barbeiro',
+                    'Experimente o serviço do nosso profissional júnior — excelência não precisa custar caro.',
+                    'imagem/junior_1.webp'
+                )">Agendar Serviços</button>
+        </div>
+        <img src="imagem/junior_1.webp">
+    </div>
+
+    <!-- CESAR -->
+    <div class="banner">
+        <div class="info">
+            <h2>Cesar</h2>
+            <p>Atenda-se com nosso profissional Cesar: dedicado, talentoso e pronto para te surpreender.</p>
+            <button class="btn-agendar"
+                onclick="abrirDetalhes(
+                    'Cesar Barbeiro',
+                    'Atenda-se com nosso profissional Cesar: dedicado, talentoso e pronto para te surpreender.',
+                    'imagem/cesar.jpg'
+                )">Agendar Serviços</button>
+        </div>
+        <img src="imagem/cesar.jpg">
+    </div>
+
+    <!-- ROBERTO -->
+    <div class="banner">
+        <div class="info">
+            <h2>Roberto</h2>
+            <p>Garanta seu horário com nosso profissional Roberto — qualidade, cuidado e preço justo.</p>
+            <button class="btn-agendar"
+                onclick="abrirDetalhes(
+                    'Roberto Barbeiro',
+                    'Garanta seu horário com nosso profissional Roberto — qualidade, cuidado e preço justo.',
+                    'imagem/Roberto_1.webp'
+                )">Agendar Serviços</button>
+        </div>
+        <img src="imagem/Roberto_1.webp">
+    </div>
+
+</section>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+
+        <div class="detalhes-barbeiro">
+            <h2 id="detalhesNome"></h2>
+            <p id="detalhesDescricao"></p>
+            <img id="detalhesImagem" src="">
+        </div>
+
+        <form class="form-agendar" method="POST" action="cadastrar.php" onsubmit="return validarFormulario()">
+
+            <label>Nome:</label>
+            <input type="text" name="nome" id="nome">
+
+            <label>Email:</label>
+            <input type="email" name="gmail" id="gmail">
+
+            <label>Data:</label>
+            <input type="date" name="data" id="data">
+
+            <label>Horário:</label>
+            <select name="hora" id="hora"></select>
+
+            <label>Serviço:</label>
+            <select name="servico" id="servico">
+                <option value="">Escolha...</option>
+                <option value="20">Degradê - R$20</option>
+                <option value="30">Cabelo e Barba - R$30</option>
+                <option value="30">Degradê Navalhado - R$30</option>
+                <option value="15">Social - R$15</option>
+                <option value="5">Sobrancelha - R$5</option>
+            </select>
+
+            <label>Observação:</label>
+            <textarea name="obs" id="obs"></textarea>
+
+            <button type="submit">Finalizar</button>
+        </form>
+
+    </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
