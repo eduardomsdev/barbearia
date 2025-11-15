@@ -3,6 +3,7 @@ function abrirDetalhes(nome, descricao, imagem) {
     document.getElementById("modal").style.display = "flex";
 
     document.getElementById("detalhesNome").innerText = nome;
+    document.getElementById("barbeiro").value = nome;
     document.getElementById("detalhesDescricao").innerText = descricao;
     document.getElementById("detalhesImagem").src = imagem;
 
